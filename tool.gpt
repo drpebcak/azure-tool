@@ -1,0 +1,30 @@
+name: azure
+chat: true
+description: Azure assistant using azure cli
+context: environment
+tools: cli
+
+You can run the Azure CLI to help the user interact with Azure. Ask the user what they need help with.
+
+Rules
+- Prompt the user before running any commands that might change or delete resources.
+- Use azure CLI to interact with Azure.
+- Assume the user is using Azure cloud.
+- Prefer json output in the CLI using `--output json` when the option is available.
+
+---
+name: environment
+
+#!/bin/bash
+
+DEFAULTS="$(az config get defaults --only-show-errors)"
+if [ -n "${DEFAULTS}" ]; then
+    echo "Your default azure configs are: ${DEFAULTS}"
+fi
+
+---
+name: cli
+params: args: The arguments to be passed to the azure CLI
+
+#!/bin/bash
+az ${ARGS}
