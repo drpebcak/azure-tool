@@ -24,7 +24,7 @@ fi
 
 ---
 name: cli
-params: args: The arguments to be passed to the azure CLI
+params: args: The subcommands and arguments to be passed to the az (azure) CLI
 
 #!/bin/bash
 az ${ARGS}
